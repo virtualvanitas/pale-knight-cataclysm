@@ -1,0 +1,135 @@
+{
+    "_about":  "Game systems the mashup adds or changes, one row each. Creator\u0027s design (2026-11-09): the Pale Knight fires; transforming is Lies of P\u0027s Pale Knight buff, which raises its shot damage; built on the Holy Moonlight Sword\u0027s moveset (a143), whose transformed attacks already fire a projectile. Cataclysm: hold to charge, Lies of P animations, and it takes the place of the Hunter\u0027s left arm. \u0027status\u0027 = designed / built / verified (seen working in the running game).",
+    "columns":  [
+                    "key",
+                    "weapon",
+                    "what",
+                    "bbMechanism",
+                    "templateFrom",
+                    "lopSource",
+                    "values",
+                    "status"
+                ],
+    "rows":  [
+                 {
+                     "key":  "pk-moveset-base",
+                     "weapon":  "PaleKnight",
+                     "what":  "Moveset slots, hit windows, cancels and the projectile events come from the Holy Moonlight Sword",
+                     "bbMechanism":  "TAE category a160 copied from a143; EquipParamWeapon row copied from 26000000 (wepmotionCategory 143, behaviorVariationId 2600)",
+                     "templateFrom":  "a143 / 26000000",
+                     "lopSource":  "",
+                     "values":  "wepmotionCategory=143 kept so the Hunter uses the copied a160 TAE through wepmotionBothHandId=60",
+                     "status":  "designed"
+                 },
+                 {
+                     "key":  "pk-shot",
+                     "weapon":  "PaleKnight",
+                     "what":  "The Pale Knight fires a shot from its barrel on its gun attacks (transformed R2, charged R2 and transformed L1)",
+                     "bbMechanism":  "the HMS slots\u0027 bullet events keep firing, through the Pale Knight\u0027s own BehaviorParam_PC rows (copied from behaviorVariationId 2600) pointing at a new Bullet row: a fast short-range explosive shot copied from the Hunter Blunderbuss/Cannon bullet with the moonlight visuals swapped for gunfire",
+                     "templateFrom":  "BehaviorParam_PC 2600xxxx, Bullet (blunderbuss/cannon)",
+                     "lopSource":  "montage marks LProjectile / LChargeShotgunFired give the fire time",
+                     "values":  "uses 1 Quicksilver Bullet per shot (bulletConsumeNum=1)",
+                     "status":  "designed"
+                 },
+                 {
+                     "key":  "pk-buff",
+                     "weapon":  "PaleKnight",
+                     "what":  "Transforming plays Lies of P\u0027s Pale Knight fable-art buff and raises the shot\u0027s damage for a while",
+                     "bbMechanism":  "transform slots (33300 / 43300) play the converted MT_Fable_GunBlade_BLD and apply a new SpEffect (copied from a weapon-buff SpEffect) that multiplies the shot\u0027s damage; the blade glows while it lasts",
+                     "templateFrom":  "SpEffectParam (Fire Paper-style weapon buff)",
+                     "lopSource":  "Common/FableArts/MT_Fable_GunBlade_BLD",
+                     "values":  "shot damage x1.5 for 30 s (tunable)",
+                     "status":  "designed"
+                 },
+                 {
+                     "key":  "pk-anims",
+                     "weapon":  "PaleKnight",
+                     "what":  "Every Pale Knight move uses the converted Lies of P animation",
+                     "bbMechanism":  "new a160_xxxxxx.hkx in c0000_a9x.anibnd, built from the player\u0027s Lies of P at setup; TAE slots point at them, events re-timed to the Lies of P marks",
+                     "templateFrom":  "a143 events",
+                     "lopSource":  "moves sheet",
+                     "values":  "",
+                     "status":  "designed"
+                 },
+                 {
+                     "key":  "cat-charge",
+                     "weapon":  "Cataclysm",
+                     "what":  "Hold to charge, release for the big blast",
+                     "bbMechanism":  "left-hand gun slots: tap fire 51000, hold-charge then release 52550 (the Cannon/Blunderbuss charge flow), charged blast uses a stronger Bullet row",
+                     "templateFrom":  "a129 (Hunter Blunderbuss) / Cannon charge slots",
+                     "lopSource":  "MT_Arm_ChargeShotgun_Fire1..3",
+                     "values":  "",
+                     "status":  "designed"
+                 },
+                 {
+                     "key":  "cat-arm",
+                     "weapon":  "Cataclysm",
+                     "what":  "Equipped, it is the Hunter\u0027s left arm: the whole Lies of P forearm, hand and cannon, over the Hunter\u0027s own forearm",
+                     "bbMechanism":  "weapon model built in the left-hand weapon\u0027s space so it covers forearm and hand (fit \u0027arm-cover\u0027); the Hunter\u0027s sleeve stays inside it",
+                     "templateFrom":  "wp_a_2600",
+                     "lopSource":  "SK_SLA_PC_Pino_01_ChargeShotgun (all arm bones)",
+                     "values":  "",
+                     "status":  "designed"
+                 },
+                 {
+                     "key":  "pk-idle-transform",
+                     "weapon":  "PaleKnight",
+                     "what":  "L1 while standing or moving transforms the Pale Knight with the Lies of P twirl (creator 2026-11-10, 0.3.2 test: it only transformed from a combo)",
+                     "bbMechanism":  "control script (text HKS), Act_AttackRight\u0027s plain-transform branch: when the right weapon\u0027s own moveset is 160 and it is in its normal form, fire W_ChangeGimmick_RightSide_ModeA (the combo transform, slot 33310 = converted Lies of P twirl + Strengthen Bullet, proven to transform) instead of W_ChangeGimmick (the shared Moonlight Sword idle transform). Transforming back from standing keeps Bloodborne\u0027s own shared move (a000_019570), which is known to work.",
+                     "templateFrom":  "HKS Act_AttackRight",
+                     "lopSource":  "Common/FableArts/MT_Fable_GunBlade_HND (moves 33300/33310)",
+                     "values":  "moveset 160, form state 1",
+                     "status":  "built"
+                 },
+                 {
+                     "key":  "cat-relaxed-hand",
+                     "weapon":  "Cataclysm",
+                     "what":  "Cataclysm stays along the forearm as in Lies of P instead of being twisted forward like a pistol when idle/walking",
+                     "bbMechanism":  "control script: after Act_LeftWeaponAddAnime runs, MasterBlend = 0 for left moveset 161 (switches off the pistol-holding additive layer); LeftWeaponAdd itself is left as the pistol\u0027s, so the firing moves still find their clips (0.2.9: LeftWeaponAdd 100 locked firing in an A-pose)",
+                     "templateFrom":  "HKS Act_LeftWeaponAddAnime",
+                     "lopSource":  "",
+                     "values":  "left moveset 161",
+                     "status":  "built"
+                 },
+                 {
+                     "key":  "cat-anims",
+                     "weapon":  "Cataclysm",
+                     "what":  "Cataclysm\u0027s fire, charge and dash-fire use the converted Lies of P animations",
+                     "bbMechanism":  "new a161_xxxxxx.hkx, upper-body only so the legs keep Bloodborne\u0027s movement",
+                     "templateFrom":  "a129 events",
+                     "lopSource":  "moves sheet",
+                     "values":  "",
+                     "status":  "designed"
+                 },
+                 {
+                     "key":  "cat-side-dodge-fire",
+                     "weapon":  "Cataclysm",
+                     "what":  "Creator 2026-11-18: dodging left or right (locked on) and firing the Cataclysm plays Lies of P\u0027s own left/right Legion-arm dash instead of the back-dash fire every direction used",
+                     "bbMechanism":  "Bloodborne picks a left-gun roll shot through manual selectors named \u0027AtkLeft_GunShot_Rolling_IdleNN Front/Back/Left/Right\u0027 (all four ask for slot 52550 family, NoLock 52250). The Left and Right selectors are given their own slot families (52750 / 52850, same +2/+3/+5 and +10 buffed offsets) for every gun moveset they hold (their clips cloned and renamed to the new slot); every other gun\u0027s new slot imports its own 52550-family move (TAE ImportOtherAnim), so other guns play exactly what they did; the Cataclysm\u0027s new slots are new moves rows (newSlot) with the Lies of P dash.",
+                     "templateFrom":  "a129 52550 events (the shot)",
+                     "lopSource":  "Common/SlaveArm/MT_Arm_ChargeShotgun_Dash_L / _Dash_R",
+                     "values":  "moves rows 52750 (left), 52850 (right); shot at 0.25 s into the dash (hitTime)",
+                     "status":  "built"
+                 },
+                 {
+                     "key":  "pk-held-r2-no-pellets",
+                     "weapon":  "PaleKnight",
+                     "what":  "Creator 2026-11-18 (0.3.34 test): the held R2 fires no pellets in either form (they flew backwards); its spin slash deals physical, fire and arcane damage",
+                     "bbMechanism":  "32630: no added shot or gun flash; 42630: template shot stripped (stripShots). Slash judges 170/570/571 get own AtkParam copies 9608000+judge with phys/arcane(mag)/fire corrections equal (shots mixedDamage).",
+                     "templateFrom":  "its own slash attacks",
+                     "lopSource":  "TwoHand/GunBlade/MT_GunBlade_CA4",
+                     "values":  "judges 170, 570, 571",
+                     "status":  "built"
+                 },
+                 {
+                     "key":  "pk-held-r2-fire",
+                     "weapon":  "PaleKnight",
+                     "what":  "Creator 2026-11-18: the Boom Hammer\u0027s transformed-R1 fire burns on the Pale Knight\u0027s blade during the held R2\u0027s spin slash",
+                     "bbMechanism":  "moves trailFxFrom a145:40000: the Boom Hammer transformed R1\u0027s effect events (type 96: fire 7115 on its head points, burst 267) and its swing sounds (type 128, kind 1) around its hit, moved onto the held R2\u0027s spin-slash hit (same lead time) and onto the blade points trailFxPoints, ending trailFxTail after the slash\u0027s hit",
+                     "templateFrom":  "a145_040000 (player\u0027s Bloodborne)",
+                     "lopSource":  "MT_GunBlade_CA4 WeaponHitCheck",
+                     "values":  "rows 32630 (10130, 10100) and 42630 (12130, 12100)",
+                     "status":  "built"
+                 }
+             ]
+}

@@ -1,0 +1,287 @@
+{
+    "_about":  "The Pale Knight\u0027s shots and buff (systems.json pk-shot / pk-buff). The weapon gets its own behaviour variation (behaviorVariation), a copy of every Holy Moonlight Sword behaviour row (1026xxxxx -\u003e 1096xxxxx). Each row here is one of those behaviours that fires a projectile: its moonlight bullet is replaced by a new bullet copied from the Cannon\u0027s explosive shot (visualFrom: flight look, explosion child and fire hit), keeping the Holy Moonlight Sword\u0027s attack numbers (atkId from the moonlight bullet) so damage still scales with the weapon. buff: the Strengthen Bullet SpEffect, a copy of Bloodborne\u0027s own gun-damage buff (2230, Bone Marrow Ash\u0027s), applied by the transform slot, lasting \u0027endurance\u0027 seconds. 0.3.6 (creator\u0027s 0.3.5 test: the cannonball was slow enough to outrun, immersion breaking): visualFrom 600 = the Hunter Blunderbuss\u0027s own shot (長銃_銃弾_至近距離, which hands over to its near/mid-range pellets 601/602) instead of the Cannon\u0027s 700. splitPellets (0.3.21, creator 0.3.20 test: the transformed R2 follow-up killed Vicar Amelia in one hit): the Hunter Blunderbuss look fires 5 pellets per shot and each carried the full Moonlight Sword beam attack (up to 280%), so a point-blank volley hit 5 times. Each shot\u0027s pellets get their own attack copy (9690000 + shot bullet id % 10000) with every correction divided by the pellet count. 0.3.22 (creator 0.3.21 test: the Pale Knight\u0027s blunderbuss shots did no damage at all): the Moonlight Sword beam attacks are magic only and the Pale Knight has no magic attack, so the split beam did nothing; all earlier damage came from the blunderbuss pellets\u0027 own attack (500: 100% physical, magic, fire, lightning per pellet, 35 pellets per volley = the one-hit kills). The pellet chain now uses the pellet attack\u0027s damage types, scaled so a full volley equals the beam\u0027s strength (its largest correction, 200-280%). pelletStrength (0.3.24, creator 0.3.23 test: transformed pellets a little weak, turn up 15%): multiplies every shot\u0027s full-volley strength (the untransformed and transformed R2 shots share their bullets).",
+    "columns":  [
+                    "key",
+                    "behaviorFrom",
+                    "moonBullet",
+                    "newBullet",
+                    "visualFrom",
+                    "note",
+                    "behaviorTo",
+                    "carrierJudge",
+                    "carrierJudgeB",
+                    "carrierJudgeRev"
+                ],
+    "behaviorVariation":  {
+                              "from":  2600,
+                              "to":  9600
+                          },
+    "buff":  {
+                 "spEffect":  9600010,
+                 "copyOf":  2230,
+                 "endurance":  30,
+                 "slot":  33300,
+                 "countsAs":  2230
+             },
+    "rows":  [
+                 {
+                     "key":  "charged-small",
+                     "behaviorFrom":  102600590,
+                     "moonBullet":  1100,
+                     "newBullet":  9601100,
+                     "visualFrom":  600,
+                     "note":  "transformed charged R2, small. Also every untransformed shot (shotFrom 42620). (2026-11-18: a reversed carrier was tried for the held R2 and dropped: the creator removed the held R2 pellets instead.)",
+                     "carrierJudge":  990,
+                     "carrierJudgeB":  940,
+                     "carrierJudgeRev":  0,
+                     "behaviorTo":  0
+                 },
+                 {
+                     "key":  "charged-big-1",
+                     "behaviorFrom":  102600591,
+                     "moonBullet":  1110,
+                     "newBullet":  9601110,
+                     "visualFrom":  600,
+                     "note":  "transformed charged R2, big, first",
+                     "carrierJudge":  991,
+                     "carrierJudgeB":  941,
+                     "behaviorTo":  0,
+                     "carrierJudgeRev":  0
+                 },
+                 {
+                     "key":  "charged-big-2",
+                     "behaviorFrom":  102600592,
+                     "moonBullet":  1120,
+                     "newBullet":  9601120,
+                     "visualFrom":  600,
+                     "note":  "transformed charged R2, big, second (Full Salvo)",
+                     "carrierJudge":  992,
+                     "carrierJudgeB":  942,
+                     "behaviorTo":  0,
+                     "carrierJudgeRev":  0
+                 },
+                 {
+                     "key":  "backstep",
+                     "behaviorFrom":  102600612,
+                     "moonBullet":  1130,
+                     "newBullet":  9601130,
+                     "visualFrom":  600,
+                     "note":  "transformed backstep attack",
+                     "carrierJudge":  993,
+                     "carrierJudgeB":  943,
+                     "behaviorTo":  0,
+                     "carrierJudgeRev":  0
+                 },
+                 {
+                     "key":  "jump",
+                     "behaviorFrom":  102600712,
+                     "moonBullet":  1140,
+                     "newBullet":  9601140,
+                     "visualFrom":  600,
+                     "note":  "transformed jump attack",
+                     "carrierJudge":  994,
+                     "carrierJudgeB":  944,
+                     "behaviorTo":  0,
+                     "carrierJudgeRev":  0
+                 },
+                 {
+                     "key":  "dash",
+                     "behaviorFrom":  102600732,
+                     "moonBullet":  1150,
+                     "newBullet":  9601150,
+                     "visualFrom":  600,
+                     "note":  "transformed dash attack",
+                     "carrierJudge":  995,
+                     "carrierJudgeB":  945,
+                     "behaviorTo":  0,
+                     "carrierJudgeRev":  0
+                 },
+                 {
+                     "key":  "rifle-spear",
+                     "behaviorFrom":  102600712,
+                     "moonBullet":  1140,
+                     "newBullet":  9601500,
+                     "visualFrom":  800,
+                     "note":  "untransformed R2 shots (creator 2026-11-10: the Rifle Spear\u0027s shot): a new behaviour 109600500 built like the Moonlight Sword\u0027s projectile (TAE 318 judge 500), firing a bullet with the Rifle Spear bullet 800\u0027s look",
+                     "behaviorTo":  109600500,
+                     "carrierJudge":  0,
+                     "carrierJudgeB":  0,
+                     "carrierJudgeRev":  0
+                 },
+                 {
+                     "key":  "cannon",
+                     "behaviorFrom":  102600712,
+                     "moonBullet":  1140,
+                     "newBullet":  9601160,
+                     "visualFrom":  700,
+                     "note":  "Creator 0.3.9 test: the transformed L2 and the combo transform back (Full Salvo) fire the cannonball again (the Cannon shot 700, as when L2 fired in 0.3.4); every other shot stays the Hunter Blunderbuss shot. Its own behaviour 109600970 (judge 970, a copy of the jump shot 712) so the jump shot keeps the blunderbuss.",
+                     "behaviorTo":  109600970,
+                     "carrierJudge":  0,
+                     "carrierJudgeB":  0,
+                     "carrierJudgeRev":  0
+                 }
+             ],
+    "extraBehaviors":  [
+
+                       ],
+    "blast":  {
+                  "judge":  960,
+                  "behaviorFrom":  102600000,
+                  "atkFrom":  2600000,
+                  "atkTo":  9609600,
+                  "mapHitType":  2,
+                  "stamina":  0,
+                  "segments":  [
+                                   {
+                                       "from":  10120,
+                                       "to":  10100,
+                                       "radius":  0.45
+                                   },
+                                   {
+                                       "from":  10100,
+                                       "to":  10190,
+                                       "radius":  0.5
+                                   },
+                                   {
+                                       "from":  10190,
+                                       "to":  10191,
+                                       "radius":  0.6
+                                   },
+                                   {
+                                       "from":  10191,
+                                       "to":  10192,
+                                       "radius":  0.7
+                                   }
+                               ],
+                  "note":  "Creator 0.3.7 test (and confirmed by the creator: no Bloodborne right-hand weapon shoots untransformed): Bloodborne only fires a right-hand projectile in the transformed form (every vanilla right-hand shot event comes after the form change), and the borrowed shot hit (judge 711) sits on the transformed blade (dummies 12100-12110), which isn\u0027t there untransformed, so the untransformed R2 shots never fired or hit. The untransformed shots are now a blast: a hit from the blade tip (dummy 100) out along the blade through new points 190/191/192 (items sheet reachDummies: 1.5, 3 and 4.5 m past the tip), widening like a blunderbuss spread, a copy of the untransformed R2 tap\u0027s attack (2600150, so it scales with the weapon) that ignores walls and the ground. Behaviour 109600960 (judge 960), attack 9609600; moves rows with blastJudge 960 fire it at every Lies of P fire mark. 0.3.9 (creator 0.3.8 test: still no damage): measured in the built moves, the blade tip is about 2.5 m in front of the Hunter when the shot fires, and the blast started at the tip, so an enemy in normal melee range was never inside it. It now starts at the hand (10120 -\u003e tip 10100) and runs out to 4.5 m past the tip, and shows the Hunter Blunderbuss pellet sparks (sfx 6310) along it. Note: in Lies of P the backstep R2 (SA4) and held R2 (CA4) fire the gun behind Pino to launch the dash, so their blast goes behind; their damage is the slash/thrust that follows. 0.3.19: used again on the R2 follow-up (32660) so it does damage with an empty pouch (events now run since the event-group fix). 0.3.23 (creator: the untransformed R2 follow-up killed in one hit): built from the plain R1 hit (behaviour 102600000, attack 2600000: 100%, normal attack type) instead of the charged R2 tap\u0027s (charge-attack type, stronger stagger).",
+                  "sfx":  [
+                              {
+                                  "id":  6310,
+                                  "dummy":  10190
+                              },
+                              {
+                                  "id":  6310,
+                                  "dummy":  10191
+                              }
+                          ]
+              },
+    "melee":  {
+                  "atkFrom":  2600000,
+                  "atkTo":  9600000,
+                  "mapHitType":  2,
+                  "note":  "Creator 0.3.4 test: R1 bounced off the ground/walls (long blade). Every Pale Knight melee behaviour (refType 0, refId 2600xxx) points at its own copy 9600xxx with mapHitType 2 (Bloodborne\u0027s \u0027doesn\u0027t hit the map\u0027, as its Blacksky/heal attacks use), so swings pass through walls and slopes instead of recoiling. 0.3.6 (creator\u0027s 0.3.5 test: dodge attacks did no damage and the transformed L2 stopped firing after this went on every attack): only the R1 combo and running R1 (judges 0-30, 320; 400-430, 720 transformed), where the bouncing happened, get the no-map copies (0.3.8, creator\u0027s 0.3.7 test: dodge attacks sometimes did no damage and played a long recovery, i.e. the swing hit the ground and bounced like R1 did, and backstep R2 was inconsistent: dodge attacks 220/240/250, transformed 620/640/650, and backstep attacks 200/210, transformed 600/610/611, get them too); every other attack is the template\u0027s again. 0.3.12 (creator 0.3.11 test: forward dodge, back-roll and backstep R1 attacks still did no damage while side dodges did): the template hit points only cover the outer blade (tip to 0.64 m) plus a thin 0.1 m line, and the Pale Knight blade is 1.55 m, so an enemy close in front (after a forward roll) sat in a gap. fullBlade: the second hit line runs the whole inner blade (10110 -\u003e 10120, near the hand) at the outer line\u0027s radius. 0.3.18 (creator 0.3.17 test: the R2 follow-up did no damage with no bullets left; its shot needs bullets): the untransformed R2 strikes (150 tap, 170 held, 180 follow-up, 330 running) get the whole-blade, no-bounce copies too, so they land without the shot. 2026-11-18: + 570/571 (transformed held R2 slash, normal and out of ammo) so they have own copies for mixedDamage.",
+                  "judges":  [
+                                 0,
+                                 10,
+                                 20,
+                                 30,
+                                 320,
+                                 400,
+                                 410,
+                                 420,
+                                 430,
+                                 720,
+                                 200,
+                                 210,
+                                 220,
+                                 240,
+                                 250,
+                                 600,
+                                 610,
+                                 611,
+                                 620,
+                                 640,
+                                 650,
+                                 150,
+                                 170,
+                                 180,
+                                 330,
+                                 570,
+                                 571
+                             ],
+                  "fullBlade":  true
+              },
+    "leftShot":  {
+                     "weapon":  "Cataclysm",
+                     "variationFrom":  600,
+                     "variationTo":  9700,
+                     "judge":  0,
+                     "behaviorFrom":  0,
+                     "specialJudge":  810,
+                     "specialBulletFrom":  700,
+                     "specialBullet":  9701810,
+                     "note":  "Creator 2026-11-11 (0.3.15 test): the Strengthen Bullet buff passes to the left-hand gun like Bone Marrow Ash; buffed, the Cataclysm should fire the cannonball, unbuffed the blunderbuss shot. Bloodborne fires a left gun\u0027s special shot (judge 810, its EnchantGun variants) while Bone Marrow Ash (2230) is on; the control script now counts Strengthen Bullet (9600010) as that too (buff.countsAs). The Cataclysm gets its own behaviour variation 9700 (copies of the Hunter Blunderbuss\u0027s 600 rows, so the real Blunderbuss is untouched) whose special shot 810 fires bullet 9701810, a copy of the Cannon\u0027s shot 700. 0.3.17 (creator 0.3.16 test: the buffed shot did less damage than the normal one): the blunderbuss fires 5 pellets that split again, each a full hit (atk 500 at 100%), while the Cannon\u0027s shot is one direct hit (atk 600) and one blast (atk 601), each 100%. The buffed shot gets its own copies: direct hit atk 9701600 at 600% and blast bullet 9701811 (copy of 701) with atk 9701601 at 400%. 0.3.18 (creator 0.3.17 test: works, reduce the power a bit): 450% direct, 300% blast.",
+                     "specialDirectCorrection":  450,
+                     "specialBlastCorrection":  300,
+                     "specialBlastBullet":  9701811,
+                     "specialAtkBase":  9701600
+                 },
+    "bulletCost":  {
+                       "fromSlot":  46000,
+                       "judge":  931,
+                       "note":  "Creator 0.3.17 test: every Pale Knight shot costs 1 Quicksilver Bullet. Bloodborne\u0027s own way: the Moonlight Sword\u0027s L2 fires a bullet-use event (judge 931, bullet 1160 = the bullet-consumption dummy) with its shot; moves rows with bulletCost true get a copy of that event at every shot they fire (the weapon uses bulletConsumeNum = 1). Bloodborne fires these right-hand shots only while the Hunter has bullets (the Moonlight Sword\u0027s rule, in the game itself), so with none left only the strikes happen. 0.3.19: not used (creator 0.3.18 test: the added bullet-use events changed nothing; the cost comes from the left-hand gun)."
+                   },
+    "blastB":  {
+                   "judge":  961,
+                   "behaviorFrom":  102600000,
+                   "atkFrom":  2600000,
+                   "atkTo":  9609610,
+                   "mapHitType":  2,
+                   "stamina":  0,
+                   "segments":  [
+                                    {
+                                        "from":  12120,
+                                        "to":  12100,
+                                        "radius":  0.45
+                                    },
+                                    {
+                                        "from":  12100,
+                                        "to":  12190,
+                                        "radius":  0.5
+                                    },
+                                    {
+                                        "from":  12190,
+                                        "to":  12191,
+                                        "radius":  0.6
+                                    },
+                                    {
+                                        "from":  12191,
+                                        "to":  12192,
+                                        "radius":  0.7
+                                    }
+                                ],
+                   "note":  "Creator 0.3.19 test: transformed R2 did no damage with an empty pouch. Without bullets Bloodborne plays the Moonlight Sword\u0027s out-of-ammo versions (42621, 42631, 42661), which followed the shot-only rows. The transformed blast: the same blast on the transformed blade part (12xxx points; the reach points 190-192 are on that part too), judge 961, attack 9609610. 0.3.23 (creator: the untransformed R2 follow-up killed in one hit): built from the plain R1 hit (behaviour 102600000, attack 2600000: 100%, normal attack type) instead of the charged R2 tap\u0027s (charge-attack type, stronger stagger).",
+                   "sfx":  [
+                               {
+                                   "id":  6310,
+                                   "dummy":  12190
+                               },
+                               {
+                                   "id":  6310,
+                                   "dummy":  12191
+                               }
+                           ]
+               },
+    "splitPellets":  true,
+    "pelletStrength":  1.15,
+    "pelletDamageTypes":  [
+                              "atkMagCorrection",
+                              "atkFireCorrection"
+                          ],
+    "_pelletDamageTypes":  "0.3.27 (creator chose option 2 after 0.3.26: the Pale Knight\u0027s shots scale with Arcane like the Holy Moonlight Sword\u0027s beams; if too strong, try Bloodtinge like the Rifle Spear): the pellets deal arcane (atkMag, the Pale Knight\u0027s Arcane ATK, Arcane scaling) and fire (its Fire ATK, also Arcane scaling), each at the full volley share; physical off (a shot\u0027s physical part comes from Blood ATK, which the Pale Knight doesn\u0027t have).",
+    "_carrierJudge":  "0.3.29 (creator 0.3.27: arcane-only pellets did no damage, 35 tiny hits eaten by defence; 0.3.28\u0027s carrier bullet fired by a second shot event cost a second Quicksilver Bullet and often missed): each pellet shot carries the whole shot\u0027s damage (the Moonlight Sword beam\u0027s strength x pelletStrength in pelletDamageTypes) as one hit along the shot line at the shot\u0027s moment, shaped like the blast of the form it leaves from: carrierJudge = normal blade (blast points, hand to 4.5 m past the tip), carrierJudgeB = transformed blade (blastB points). Behaviour 1096009xx -\u003e AtkParam 9609000+judge (copy of the blast\u0027s). The pellets keep their look, stagger and knockback but deal no damage.",
+    "mixedDamage":  {
+                        "atkBase":  9608000,
+                        "judges":  [
+                                       170,
+                                       570,
+                                       571
+                                   ],
+                        "types":  [
+                                      "atkPhysCorrection",
+                                      "atkMagCorrection",
+                                      "atkFireCorrection"
+                                  ],
+                        "note":  "Creator 2026-11-18 (0.3.34 test: the held R2 pellets still flew backwards): no pellets on the held R2 in either form; its spin slash deals physical, fire and arcane damage instead. Each judge (170 = normal-form held R2 slash, 570/571 = transformed, out of ammo / normal) gets its own attack copy (atkBase + judge, from its current attack) with every listed correction set to the largest of them, so it scales on the Pale Knight\u0027s Physical, Fire and Arcane ATK."
+                    }
+}
